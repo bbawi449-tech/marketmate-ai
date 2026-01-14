@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MarketMate AI</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>🚀 MarketMate AI</h1>
+  <p>Your AI Marketing Partner</p>
+
+  <textarea id="prompt" placeholder="Describe your marketing problem..." rows="6" cols="50"></textarea>
+  <br><br>
+  <button onclick="send()">Solve Problem</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    async function send() {
+      const prompt = document.getElementById("prompt").value;
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById("result").innerText = data.output;
+    }
+  </script>
+</body>
+</html>
